@@ -1,0 +1,273 @@
+DESC_COBERT_mapeo = 
+/*Se realiza un mapeo de las coberturas para unificar nombres de coberturas que en definitiva son los mismos, falta ver cuales coberturas hacen cúmulo, se puede saber si se paga al asegurado unicamente o tambien al beneficiario por ejemplo fractura de huesos con muerte*/
+--Me día cuenta tarde que se podría hacer esto por codigo de cobertura en vez de nombre de cobertura
+IF('ANEXO_EXP_AP_VG_SALUD'[PRODUCTO] = "AP",
+SWITCH(
+    TRUE(),
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {                                                                                  --INDEMNIZACION ADICIONAL ACC
+        "CUIDADOS PROLONGADOS EN EL HOGAR POR ACCIDENTE", 
+        "COBERTURA ADICIONAL",
+        "Indemnización Adicional - Muerte Accidental","INDEMNIZACIÓN ADICIONAL EN CASO DE MUERTE ACCIDENTAL - CLÁUSULA C",
+        "INDEMNIZACIÓN ADICIONAL EN CASO DE MUERTE ACCIDENTAL - CLÁUSULA D",
+        "Indemnizaciones Adicionales Por Accidente - Clausula A",
+        "Indemnizaciones Adicionales Por Accidente - Clausula B"}, "INDEMNIZACION ADICIONAL ACC",
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {                                                                                                          --Fracturas
+        "FRACTURA DE HUESOS, DISLOCACIONES, QUEMADURAS","Fractura de huesos, dislocaciones y quemaduras por accidente"}, "Fracturas",                       
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {                                                                                                          --INVALIDEZ accidental
+        "INDEMNIZACIÓN POR INCAPACIDAD PERMANENTE COBERTURA AMPLIA",
+        "INDEMNIZACIÓN POR INCAPACIDAD PERMANENTE COBERTURA LIMITADA",
+        "INVALIDEZ PERMANENTE - AMPLIA",
+        "Invalidez Permanente Parcial y Total",
+        "Invalidez permanente total o parcial por accidente hasta los 65 años",
+        "Invalidez permanente total y parcial por accidente",
+        "Invalidez total y permanente por accidente",
+        "MÓDULO VII-INVALIDEZ PARCIAL",
+        "Pérdidas físicas parciales por accidente",
+        "Incapacidad Total Y Permanente Por Accidente",
+        "INDEMNIZACIÓN POR DESMEMBRAMIENTO ACCIDENTAL - E",
+        "Pérdidas físicas parciales por accidente",
+        "Invalidez total y permanente por accidente",
+        "INVALIDEZ TOTAL Y PERMANENTE POR ACCIDENTE - B",
+        "INVALIDEZ TOTAL Y PERMANENTE POR ACCIDENTE - Q"}, "INVALIDEZ accidental",
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] = "Reembolso de gastos médicos por accidente", "Reembolso de gastos por accidente",                                       --Reembolso de gastos por accidente
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {"Reintegro de Gastos por Asistencia Medico-Farmaceutica", "Reembolso de gastos médicos"}, "Reintegro de Gastos",          --Reintegro de Gastos
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {                                                                                                            --RENTA DIARIA POR INTERNACION
+        "RENTA DIARIA POR INTERNACION - M",
+        "Renta diaria por internación hospitalaria",
+        "Renta diaria por internación hospitalaria conjunta",
+        "Renta diaria por internación hospitalaria por accidente",
+        "Renta diaria por internación terapia intensiva",
+        "Renta diaria por internación hospitalaria del cónyuge",
+        "Renta diaria por internación hospitalaria del hijo",
+        "Internación en el extranjero",
+        "Internaciones Prolongadas",
+        "Renta diaria por enfermedad",
+        "RENTA DIARIA POR INTERNACION POR ACCID. O ENF.",
+        "RENTA DIARIA POR INTERNACIÓN POR ACCIDENTE - MÓDULO I"}, "RENTA DIARIA POR INTERNACION",
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {                                                                          --SERVICIO DE ASISTENCIAS
+        "SERVICIO DE ASISTENCIAS - LIFE ASSIST",
+        "SERVICIO DE ASISTENCIAS - MI DOC ONLINE",
+        "SERVICIO DE ASISTENCIAS - MI DOC ONLINE (TGF)",
+        "SERVICIO DE ASISTENCIAS - PERSONAS",
+        "Asistencia médico farmacéutica",
+        "Servicio de Asistencias - Salud"}, "SERVICIO DE ASISTENCIAS",
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {                                                                      --MUERTE accidental
+        "Fallecimiento por accidente",
+        "Fallecimiento por accidente - invalidez permanente total o parcial",
+        "Fallecimiento por accidente - invalidez permanente total o parcial para motociclistas",
+        "Fallecimiento por accidente aéreo",
+        "Fallecimiento por accidente de tránsito",
+        "Fallecimiento por accidente hasta 75 años",
+        "Fallecimiento por accidente hasta los 75 años",
+        "Fallecimiento por accidente hasta los 85 años",
+        "Fallecimiento por accidente internacional",
+        "MUERTE ACCIDENTAL",
+        "ACCIDENTES PERSONALES por 50.000",
+        "Doble indemnización por fallecimiento por accidente",
+        "INDEMNIZACIÓN POR MUERTE ACCIDENTAL - D"}, "MUERTE accidental",
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {"Fallecimiento por cualquier causa", "Muerte"}, "MUERTE",                 --MUERTE
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {                                                                          --GRUPO FAMILIAR
+        "Fallecimiento del cónyuge por accidente",
+        "Fallecimiento por accidente - invalidez permanente total o parcial del cónyuge",
+        "Fractura de huesos, dislocaciones y quemaduras por accidente para grupo familiar",
+        "Fallecimiento por accidente del cónyuge",
+        "Fallecimiento por accidente hijo",
+        "Pérdidas físicas parciales del cónyuge",
+        "Pérdidas físicas parciales hijo",
+        "COBERTURA GRATUITA HIJO POSTUMO Y CONYUGE VIUDO",
+        "CÓNYUGE",
+        "CÓNYUGE VIUDO E HIJO POSTUMO",
+        "CONYUGES 100%",
+        "CONYUGES 50%",
+        "EXENCIÓN DE PAGO DE PRIMAS PARA CÓNYUGES ASEGURADOS - K",
+        "Hijo Póstumo",
+        "INDEMINIZACIÓN POR NACIMIENTO DE HIJO PÓSTUMO - J",
+        "Invalidez total y permanente del cónyuge"}, "GRUPO FAMILIAR",
+
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] ="Reembolso de gastos médicos", "REEMBOLSO DE GASTOS MÉDICOS",
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] = "Renta diaria por internación hospitalaria", "RENTA DIARIA POR INTERNACION",
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {                                                                                  --RENTA DIARIA POR INTERNACION
+        "Renta diaria por internación hospitalaria del cónyuge",
+        "Renta diaria por internación hospitalaria del hijo",
+        "Renta diaria por internación hospitalaria por accidente",
+        "Internación en el extranjero",
+        "Internaciones Prolongadas"}, "RENTA DIARIA POR INTERNACION",
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {                                                                                                                 --Claúsula o endoso
+        "CLAUSULA DE COBRANZA DE PREMIO",
+        "Cláusula de cobranza del premio",
+        "Cláusula de incremento automático anual de suma asegurada",
+        "CLAUSULA REVALORIZACION",
+        "CLAUSULA REVALORIZACION SALUD",
+        "Endoso inclusión de actividad fuerzas armadas, policial o similares",
+        "Endoso inclusión de uso de motocicletas y similares"}, "Claúsula o endoso",
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {                                                                  --ENFERMEDADES GRAVES (SALUD, error del sistema)
+        "Diagnóstico de cáncer hasta los 65 años",
+        "Enfermedades graves",
+        "Enfermedades graves para grupo familiar"}, "ENFERMEDADES GRAVES (SALUD, error del sistema)",
+
+    "Sin Clasificar"
+),
+--VG
+SWITCH(
+    TRUE(),
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {                                                                                      --ENFERMEDAD GRAVE
+        "ADELANTO DEL BENEFICIO ANTE EL DIAGNÓSTICO DE ENFERMEDADES GRAVES",
+        "Adelanto por enfermedades graves","MÓDULO CIRUGÍA DE BYPASS DE LAS ARTERIAS CORONARIAS","MÓDULO DE CÁNCER TOTAL",
+        "ALTA COMPLEJIDAD MEDICA - N","MÓDULO ENFERMEDAD CEREBROVASCULAR (ACV)",
+        "ENFERMEDADES CRÍTICAS", "Diagnóstico de cáncer hasta los 65 años",
+        "Enfermedades graves", "Cáncer", "Cáncer femenino", "Diagnóstico de cáncer",
+        "Enfermedades Graves - Anticipo Capital Asegurado","MÓDULO INFARTO DE MIOCARDIO",
+        "Enfermedades Graves - Pago Adicional", "Enfermedades graves","MÓDULO INSUFICIENCIA RENAL",
+        "INDEMNIZACIÓN POR DIAGNÓSTICO DE ENFERMEDADES GRAVES - F",
+        "Intervenciones quirúrgicas de alta complejidad"},"ENFERMEDAD GRAVE",
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {                                                                                                                      --COBERTURAS ADICIONALES
+        "PAQUETE COBERTURAS ADICIONALES 1","PAQUETE COBERTURAS ADICIONALES 2"},"COBERTURAS ADICIONALES ",                                                      
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] = "Reembolso de gastos médicos", "REEMBOLSO DE GASTOS MÉDICOS",                                                           --Reembolso de gastos médicos
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] = "Reembolso de gastos médicos por accidente", "Reembolso de gastos por accidente",                                       --Reembolso de gastos por accidente
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] = "Sepelio", "Sepelio",                                                                                                   --Sepelio
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {                                                                                                                      --SERVICIO DE ASISTENCIAS
+        "SERVICIO DE ASISTENCIAS - LIFE ASSIST",
+        "SERVICIO DE ASISTENCIAS - MI DOC ONLINE",
+        "SERVICIO DE ASISTENCIAS - MI DOC ONLINE (TGF)",
+        "SERVICIO DE ASISTENCIAS - PERSONAS",
+        "Asistencia médico farmacéutica",
+        "Servicio de Asistencias - Salud"}, "SERVICIO DE ASISTENCIAS",
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {"TRASPLANTE - L", "Trasplante de órganos", "Transplante","Trasplantes","MÓDULO DE TRASPLANTES DE ÓRGANOS"}, "TRASPLANTE",                                           --TRASPLANTE
+
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {                                                                                              --ENFERMEDADES TERMINALES
+        "Adelanto por enfermedades terminales",
+        "INDEMNIZACIÓN ANTICIPADA POR ENFERMEDAD TERMINAL",
+        "INDEMNIZACIÓN POR DIAGNÓSTICO DE ENFERMEDAD TERMINAL - P"},"ENFERMEDADES TERMINALES",
+
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {                                                          --GRUPO FAMILIAR
+        "Fallecimiento del cónyuge por accidente",
+        "Fallecimiento por accidente - invalidez permanente total o parcial del cónyuge",
+        "Fractura de huesos, dislocaciones y quemaduras por accidente para grupo familiar",
+        "Fallecimiento por accidente del cónyuge",
+        "Fallecimiento por accidente hijo",
+        "Pérdidas físicas parciales del cónyuge",
+        "Pérdidas físicas parciales hijo",
+        "COBERTURA GRATUITA HIJO POSTUMO Y CONYUGE VIUDO",
+        "CÓNYUGE", "Extensión de la cobertura a plan familiar",
+        "CÓNYUGE VIUDO E HIJO POSTUMO",
+        "CONYUGES 100%",
+        "CONYUGES 50%",
+        "EXENCIÓN DE PAGO DE PRIMAS PARA CÓNYUGES ASEGURADOS - K",
+        "Hijo Póstumo",
+        "INDEMINIZACIÓN POR NACIMIENTO DE HIJO PÓSTUMO - J",
+        "Invalidez total y permanente del cónyuge"}, "GRUPO FAMILIAR",
+
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {                                                                  --MUERTE accidental
+        "Fallecimiento por accidente",
+        "Fallecimiento por accidente - invalidez permanente total o parcial",
+        "Fallecimiento por accidente - invalidez permanente total o parcial para motociclistas",
+        "Fallecimiento por accidente aéreo",
+        "Fallecimiento por accidente de tránsito",
+        "Fallecimiento por accidente hasta 75 años",
+        "Fallecimiento por accidente hasta los 75 años",
+        "Fallecimiento por accidente hasta los 85 años",
+        "Fallecimiento por accidente internacional",
+        "MUERTE ACCIDENTAL",
+        "ACCIDENTES PERSONALES por 50.000",
+        "Doble indemnización por fallecimiento por accidente",
+        "INDEMNIZACIÓN POR MUERTE ACCIDENTAL - D"}, "MUERTE accidental",
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {"Fallecimiento por cualquier causa", "Muerte"}, "MUERTE",             --MUERTE
+
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {                                              --INVALIDEZ accidental
+        "INDEMNIZACIÓN POR INCAPACIDAD PERMANENTE COBERTURA AMPLIA",
+        "INDEMNIZACIÓN POR INCAPACIDAD PERMANENTE COBERTURA LIMITADA",
+        "INVALIDEZ PERMANENTE - AMPLIA",
+        "Invalidez Permanente Parcial y Total",
+        "Invalidez permanente total o parcial por accidente hasta los 65 años",
+        "Invalidez permanente total y parcial por accidente",
+        "Invalidez total y permanente por accidente",
+        "MÓDULO VII-INVALIDEZ PARCIAL",
+        "Pérdidas físicas parciales por accidente",
+        "Incapacidad Total Y Permanente Por Accidente",
+        "INDEMNIZACIÓN POR DESMEMBRAMIENTO ACCIDENTAL - E",
+        "Pérdidas físicas parciales por accidente",
+        "Invalidez total y permanente por accidente",
+        "INVALIDEZ TOTAL Y PERMANENTE POR ACCIDENTE - B",
+        "INVALIDEZ TOTAL Y PERMANENTE POR ACCIDENTE - Q"}, "INVALIDEZ accidental",
+
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {                                                      --INVALIDEZ
+        "Doble indemnización por invalidez total y permanente",
+        "Incapacidad Fisica Total, Permanente e Irreversible",
+        "Incapacidad Total Temporaria o Permanente",
+        "Incapacidad Total y Permanente",
+        "INVALIDEZ  TOTAL Y PERMANENTE POR ENFERMEDAD Y ACCIDENTE - A",
+        "Invalidez total y permanente",
+        "INVALIDEZ TOTAL Y PERMANENTE - A"}, "INVALIDEZ",
+
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {                                                                                  --INDEMNIZACION ADICIONAL ACC
+        "CUIDADOS PROLONGADOS EN EL HOGAR POR ACCIDENTE", 
+        "COBERTURA ADICIONAL",
+        "Indemnización Adicional - Muerte Accidental","INDEMNIZACIÓN ADICIONAL EN CASO DE MUERTE ACCIDENTAL - CLÁUSULA C",
+        "INDEMNIZACIÓN ADICIONAL EN CASO DE MUERTE ACCIDENTAL - CLÁUSULA D",
+        "Indemnizaciones Adicionales Por Accidente - Clausula A",
+        "Indemnizaciones Adicionales Por Accidente - Clausula B"}, "INDEMNIZACION ADICIONAL ACC",
+
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {                                                                                                                          --RENTA DIARIA POR INTERNACION
+        "RENTA DIARIA POR INTERNACION - M",
+        "Renta diaria por internación hospitalaria",
+        "Renta diaria por internación hospitalaria conjunta",
+        "Renta diaria por internación hospitalaria por accidente",
+        "Renta diaria por internación terapia intensiva",
+        "Renta diaria por internación hospitalaria del cónyuge",
+        "Renta diaria por internación hospitalaria del hijo",
+        "Internación en el extranjero",
+        "Internaciones Prolongadas", "MÓDULO DE RENTA DIARIA POR INTERNACIÓN POR ENFERMEDAD O ACCIDENTE",
+        "Renta diaria por enfermedad",
+        "RENTA DIARIA POR INTERNACION POR ACCID. O ENF.",
+        "RENTA DIARIA POR INTERNACIÓN POR ACCIDENTE - MÓDULO I"}, "RENTA DIARIA POR INTERNACION",
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {"ADICIONAL AHORRO GARANTIZADO", "AHORRO GARANTIZADO SEGURO DE VIDA GRUPO"," "}, "Sin Clasificar",
+    
+    'ANEXO_EXP_AP_VG_SALUD'[DESC_COBERTURA] IN {                                                                                                                 --Claúsula o endoso
+        "CLAUSULA DE COBRANZA DE PREMIO",
+        "Cláusula de cobranza del premio",
+        "Cláusula de incremento automático anual de suma asegurada",
+        "CLAUSULA REVALORIZACION",
+        "CLAUSULA REVALORIZACION SALUD",
+        "Endoso inclusión de actividad fuerzas armadas, policial o similares",
+        "Endoso inclusión de uso de motocicletas y similares"}, "Claúsula o endoso",
+     "Sin Clasificar"    --Sin Clasificar        
+))
+
+
+
+
+IntervaloEdad = 
+/* Asigna un intervalo de edad a cada registros. No se toman en cuenta las fechas de nacimiento anteriores al 1/01/1920 y posteriores al 31/12/2024, aquellas, las que sean cero, no sean un número y estén vacias, van a ser asginadas al intervalo "Edad no válida"*/
+IF(
+    ISBLANK(ANEXO_EXP_AP_VG_SALUD[EDAD]) || 
+    NOT(ISNUMBER(ANEXO_EXP_AP_VG_SALUD[EDAD])) || 
+    ANEXO_EXP_AP_VG_SALUD[EDAD] = 0,
+    "Edad no válida",
+    SWITCH(
+        TRUE(),
+        ANEXO_EXP_AP_VG_SALUD[EDAD] <= 14, "0 - 14",
+        ANEXO_EXP_AP_VG_SALUD[EDAD] <= 25, "15 - 25",
+        ANEXO_EXP_AP_VG_SALUD[EDAD] <= 35, "26 - 35",
+        ANEXO_EXP_AP_VG_SALUD[EDAD] <= 45, "36 - 45",
+        ANEXO_EXP_AP_VG_SALUD[EDAD] <= 55, "46 - 55",
+        ANEXO_EXP_AP_VG_SALUD[EDAD] <= 60, "56 - 60",
+        ANEXO_EXP_AP_VG_SALUD[EDAD] <= 65, "61 - 65",
+        ANEXO_EXP_AP_VG_SALUD[EDAD] <= 70, "66 - 70",
+        ANEXO_EXP_AP_VG_SALUD[EDAD] <= 75, "71 - 75",
+        ANEXO_EXP_AP_VG_SALUD[EDAD] <= 80, "76 - 80",
+        ANEXO_EXP_AP_VG_SALUD[EDAD] <= 85, "81 - 85",
+        ANEXO_EXP_AP_VG_SALUD[EDAD] <= 90, "86 - 90",
+        ANEXO_EXP_AP_VG_SALUD[EDAD] <= 95, "91 - 95",
+        "96 +" ) )
+
+
+Medidas dinamicas:
+Medidas % AP_VG = --Se crea para intentar que el usuario pueda cambiar dinamicamente entre medidas cuando mire las matrices de AP_VG_Salud, para que mantenga el formato de los datos
+SWITCH(
+    SELECTEDVALUE('Medidas_%_Seleccionadas'[Medida]),
+    "% Exps", [Formato_% Expuestos AP_VG],
+    "% SA", [Formato_%_SA_total_AP_VG],
+    "% Prima", [Formato_%_Prima_Anual_AP_VG] )
+con:
+Formato_% Expuestos AP_VG = FORMAT([% Expuestos AP_VG], "0.00%") --por ejemplo
+
