@@ -62,3 +62,4 @@ Incluso se puede seleccionar un campo de forma dinamica para la matriz.
 - Usar botones y filtros para mejorar la experiencia del usuario.
 - Documentar las transformaciones y medidas utilizadas.
 
+¡Muchas gracias!
