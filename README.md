@@ -21,7 +21,7 @@ Ejemplo de perfil de cartera de Siniestros. En este caso el producto es vida gru
 
 ## 🧩 Organización del Modelo
 
-Una buena práctica es mantener **ordenadas las vistas de relaciones** para facilitar la comprensión del modelo de datos
+Una buena práctica es mantener **ordenadas las vistas de relaciones** para facilitar la comprensión del modelo de datos. Y ordenar y administrar las relaciones entre tablas para **evitar hacer relaciones muchos a muchos**
 
 <img width="919" height="555" alt="diagrama entidad relación" src="https://github.com/user-attachments/assets/4af30b03-e403-4faf-8ee8-61563ad52469" />
 
