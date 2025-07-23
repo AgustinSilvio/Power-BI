@@ -7,10 +7,11 @@
 <hr>
 
 # Power-BI
-Este repositorio es para aportar algunos consejos de un reporte simulando un perfil de cartera con datos ficticios de forma anónima. Te invito a comentar y aportar tus propias recomendaciones.
+Este repositorio es para aportar algunos consejos de un reporte simulando un perfil de cartera tanto para compartir con los reaseguradores como para gestión propia; con datos ficticios de forma anónima. Te invito a comentar y aportar recomendaciones.
 
 > ⚠️ *Los datos y medidas han sido modificados con fines ilustrativos, por lo que los valores pueden no tener sentido real ya que el objetivo es simplemente ilustrativo..*
 
+Por ejemplo: para contar los expuestos hice un campo que sea la combinación de nombre y DNI. Y a esa combinación le aplqué una medida para que me calcule los valores únicos ya que es posible casos que tengan el mismo N° de documento pero sean distintas personas, y no hay un campo que sea tipo de documento.
 
 # Siniestros
 
